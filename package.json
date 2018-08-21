@@ -1,0 +1,28 @@
+{
+  "name": "tesla-server",
+  "version": "1.0.0",
+  "description": "A proxy server to the Tesla API - Used to access car information as well as remote controls.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alcfeoh/tesla-server.git"
+  },
+  "keywords": [
+    "tesla",
+    "server",
+    "api"
+  ],
+  "author": "Alain Chautard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alcfeoh/tesla-server/issues"
+  },
+  "homepage": "https://github.com/alcfeoh/tesla-server#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "node-fetch": "^2.2.0"
+  }
+}
