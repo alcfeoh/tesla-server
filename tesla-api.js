@@ -28,6 +28,10 @@ const getMobileAccess =(token, vehicleId) => fetchVehicleData('mobile_enabled', 
 
 const getVehicleState = (token, vehicleId) => fetchDataRequest('vehicle_state', token, vehicleId);
 
+const getDriveState = (token, vehicleId) => fetchDataRequest('drive_state', token, vehicleId);
+
+const getClimateState = (token, vehicleId) => fetchDataRequest('climate_state', token, vehicleId);
+
 // UTILS
 function fetchVehicleData(uri, token, vehicleId) {
     return fetch(TESLA_OWNER_API_URL + 'api/1/vehicles/' + vehicleId + '/'+ uri, getHeaders(token)).then(res => res.json());
@@ -40,4 +44,4 @@ function getHeaders (token) {
 }
 
 // EXPORTS
-module.exports = {getToken, getVehicles, getChargeState, getMobileAccess, getVehicleState};
+module.exports = {getToken, getVehicles, getChargeState, getMobileAccess, getVehicleState, getDriveState, getClimateState};

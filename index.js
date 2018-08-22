@@ -32,4 +32,14 @@ app.get('/vehicleState/:vehicleId', (req, res) => {
         .then(response => res.send(response));
 });
 
+app.get('/driveState/:vehicleId', (req, res) => {
+    tesla.getDriveState(req.get('token'), req.params.vehicleId)
+        .then(response => res.send(response));
+});
+
+app.get('/climateState/:vehicleId', (req, res) => {
+    tesla.getClimateState(req.get('token'), req.params.vehicleId)
+        .then(response => res.send(response));
+});
+
 app.listen(PORT, () => console.log(`Tesla server listening on port ${PORT}`));
