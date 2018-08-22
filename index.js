@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const tesla = require('./tesla-api');
 const PORT = 8000;
 
 app.use(bodyParser.json()); // for parsing application/json
+app.use(cors());
 
 app.post('/token', (req, res) => {
     tesla.getToken(req.body.email, req.body.password)
