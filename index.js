@@ -27,4 +27,9 @@ app.get('/mobileAccess/:vehicleId', (req, res) => {
         .then(response => res.send(response));
 });
 
+app.get('/vehicleState/:vehicleId', (req, res) => {
+    tesla.getVehicleState(req.get('token'), req.params.vehicleId)
+        .then(response => res.send(response));
+});
+
 app.listen(PORT, () => console.log(`Tesla server listening on port ${PORT}`));

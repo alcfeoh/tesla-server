@@ -19,23 +19,25 @@ function getToken(email, pwd) {
     }).then(res => res.json());
 }
 
-function getVehicles(token) {
-    return fetch(TESLA_OWNER_API_URL+'api/1/vehicles', {
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-    }).then(res => res.json());
-}
+const getVehicles = (token) => fetch(TESLA_OWNER_API_URL+'api/1/vehicles', getHeaders(token)).then(res => res.json());
 
 // Vehicle ID is listed in "id_s" response from getVehicles()
-function getChargeState(token, vehicleId) {
-    return fetch(TESLA_OWNER_API_URL+'api/1/vehicles/'+ vehicleId +'/data_request/charge_state', {
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-    }).then(res => res.json());
+const getChargeState = (token, vehicleId) => fetchDataRequest('charge_state', token, vehicleId);
+
+const getMobileAccess =(token, vehicleId) => fetchVehicleData('mobile_enabled', token, vehicleId);
+
+const getVehicleState = (token, vehicleId) => fetchDataRequest('vehicle_state', token, vehicleId);
+
+// UTILS
+function fetchVehicleData(uri, token, vehicleId) {
+    return fetch(TESLA_OWNER_API_URL + 'api/1/vehicles/' + vehicleId + '/'+ uri, getHeaders(token)).then(res => res.json());
 }
 
-function getMobileAccess(token, vehicleId) {
-    return fetch(TESLA_OWNER_API_URL+'api/1/vehicles/'+ vehicleId +'/mobile_enabled', {
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-    }).then(res => res.json());
+const fetchDataRequest = (uri, token, vehicleId) => fetchVehicleData('data_request/' + uri, token, vehicleId);
+
+function getHeaders (token) {
+    return {headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }};
 }
 
-module.exports = {getToken, getVehicles, getChargeState, getMobileAccess};
+// EXPORTS
+module.exports = {getToken, getVehicles, getChargeState, getMobileAccess, getVehicleState};
