@@ -44,4 +44,9 @@ app.get('/climateState/:vehicleId', (req, res) => {
         .then(response => res.send(response));
 });
 
+app.get('/guiSettings/:vehicleId', (req, res) => {
+    tesla.getGUISettings(req.get('token'), req.params.vehicleId)
+        .then(response => res.send(response));
+});
+
 app.listen(PORT, () => console.log(`Tesla server listening on port ${PORT}`));
