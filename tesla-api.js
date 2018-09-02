@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const queryString = require('query-string');
 
 const TESLA_OWNER_API_URL = "https://owner-api.teslamotors.com/";
 const API_CLIENT_ID = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
@@ -39,11 +40,23 @@ function fetchVehicleData(uri, token, vehicleId) {
     return fetch(TESLA_OWNER_API_URL + 'api/1/vehicles/' + vehicleId + '/'+ uri, getHeaders(token)).then(res => res.json());
 }
 
+function postVehicleData(uri, token, vehicleId) {
+    return fetch(TESLA_OWNER_API_URL + 'api/1/vehicles/' + vehicleId + '/'+ uri, {method: 'POST', ...getHeaders(token)}).then(res => res.json());
+}
+
 const fetchDataRequest = (uri, token, vehicleId) => fetchVehicleData('data_request/' + uri, token, vehicleId);
+
+const commandRequest = (uri, token, vehicleId, queryParams) => postVehicleData('command/' + uri+ getQueryString(queryParams), token, vehicleId);
 
 function getHeaders (token) {
     return {headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }};
 }
 
+const getQueryString = (queryParams) => (queryParams ? '?'+ queryString.stringify(queryParams) : '');
+
 // EXPORTS
-module.exports = {getToken, getVehicles, getChargeState, getMobileAccess, getVehicleState, getDriveState, getClimateState, getGUISettings};
+module.exports = {
+    getToken, getVehicles,
+    getChargeState, getMobileAccess, getVehicleState, getDriveState, getClimateState, getGUISettings,
+    commandRequest
+};

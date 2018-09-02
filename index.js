@@ -49,4 +49,9 @@ app.get('/guiSettings/:vehicleId', (req, res) => {
         .then(response => res.send(response));
 });
 
+app.get('/commands/:commandName/:vehicleId', (req, res) => {
+    tesla.commandRequest(req.params.commandName, req.get('token'), req.params.vehicleId, req.query)
+        .then(response => res.send(response));
+});
+
 app.listen(PORT, () => console.log(`Tesla server listening on port ${PORT}`));
