@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/alcfeoh/tesla-server#readme",
   "dependencies": {
-    "body-parser": "^1.20.1",
+    "body-parser": "^1.20.3",
     "cors": "^2.8.4",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "node-fetch": "^2.6.7",
     "query-string": "^6.1.0"
   }
